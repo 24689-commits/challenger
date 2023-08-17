@@ -41,9 +41,9 @@ class Users{
         gender, userDOB, emailAdd, userPass,
         profileUrl
         FROM Users
-        WHERE emailAdd = ?;
+        WHERE emailAdd = '${emailAdd}';
         `
-        db.query(query,[emailAdd] , async (err, result)=>{
+        db.query(query , async (err, result)=>{
             if(err) throw err
             if(!result?.length){
                 res.json({
@@ -113,19 +113,21 @@ class Users{
     })
     }
     updateUser(req,res){
+        const data =req.body
+        if(data.userPass){
+            data.userPass = hashSync(data.userPass,15)
+        }
         const query =`
         UPDATE Users
         SET ?
         WHERE userID=?
         `
-        db.query(query, [req.body, req.params.id],(err)=>{
+        db.query(query, [data, req.params.id],(err)=>{
            if (err) throw err
            res.json({
             status: statusCode,
             msg: "The user record was updated."
-
            })
-     
         })
     }
     deleteUser(req,res){

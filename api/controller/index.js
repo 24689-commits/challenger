@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const { verifyAToken } = require('../middleware/authenticateuser')
 const routes = express.Router()
 // importing all models objects
 const {users, Books, Orders, BookAuthor}=require('../model')
@@ -12,7 +13,7 @@ bodyParser.json(), (req, res)=>{
 })
 
 // ===Book router===
-routes.get('/Books', (req, res) => {
+routes.get('/Books',verifyAToken ,(req, res) => {
     Books.fetchBooks(req, res);
 });
 

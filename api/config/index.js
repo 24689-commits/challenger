@@ -1,5 +1,4 @@
-// lalalal
-// Database Configurations
+
 require("dotenv").config()
 const { createPool } = require("mysql")
 const connection = createPool({

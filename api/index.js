@@ -1,12 +1,11 @@
-// # to make it private , inside class we have methods (walk etc.)
 const {express, routes}= require ('./controller')
 const path =require('path')
 const cookieParser = require("cookie-parser");
-// Importing error handling middleware
 const { errorHandling } = require("./middleware/ErrorHandling");
 const cors = require('cors')
 const app = express()
-const port = +process.eventNames.PORT || 3000
+const port = +process.env.PORT || 3000
+
 
 // Middleware - Application level
 app.use((req, res, next) => {
@@ -20,15 +19,15 @@ app.use((req, res, next) => {
 });
 app.use(
     express.static('./static'),
-    express.json(),
-    cookieParser(), 
-    cors(),
     express.urlencoded({
         extended:false
     }),
+    // express.json(),
+    cookieParser(),
+    cors(),
     routes
 )
-routes.get('^/$|/challenger', (req, res)=>{
+routes.get('^/$|/challenger',(req, res)=>{
     res.sendFile(path.resolve(__dirname,
         "../api/static/html/index.html"))
 }) 

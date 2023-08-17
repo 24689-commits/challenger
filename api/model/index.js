@@ -2,7 +2,7 @@ const Users = require('./users')
 const Orders =require('./Orders')
 const Books = require('./Books')
 const  BookAuthor = require('./BookAuthor')
-// EXPORT AL OBJJECTS
+// EXPORT ALL OBJECTS
 module.exports = {
     users: new Users(),
     Orders: new Orders(),
