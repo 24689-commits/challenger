@@ -3,7 +3,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const routes = express.Router()
 // importing all models objects
-const {users, Books,Orders, BookAuthor}=require('../model')
+const {users, Books, Orders, BookAuthor}=require('../model')
 
 // login
 routes.post('/login',
